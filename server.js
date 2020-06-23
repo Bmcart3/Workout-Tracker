@@ -29,15 +29,19 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.get("/exercise", (req, res) => {
-        res.render("exercise"); 
+    if (err) {
+        res.status(500).json(err);
+      } else {
+        res.render("exercise");
+      }
 });
 
-// Workout.find({}, (err, data) => {
-//     if (err) {
-//         res.status(500).json(err);
-//       } else {
-//         res.render("exercise");
-//       }})
+Workout.find({}, (err, data) => {
+    if (err) {
+        res.status(500).json(err);
+      } else {
+        res.render("exercise");
+      }})
 
 
 //Start the server

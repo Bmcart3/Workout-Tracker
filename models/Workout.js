@@ -10,14 +10,17 @@ const UserSchema = new Schema({
         {
             type: {
                 type: String,
-                trim: true
+                trim: true,
+                required: "Exercise type required."
             },
             name: {
                 type: String,
-                trim: true
+                trim: true,
+                required: "Name required."
             },
             duration: {
-                type: Number
+                type: Number,
+                required: "Exercise duration required."
             },
             weight: {
                 type: Number
