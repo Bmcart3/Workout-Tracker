@@ -29,19 +29,39 @@ app.get("/api/workouts", (req, res) => {
 });
 
 app.get("/exercise", (req, res) => {
-    if (err) {
-        res.status(500).json(err);
-      } else {
-        res.render("exercise");
-      }
+  db.Workout.find({})
+    .then(Workout => {
+      res.json(Workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
 
-Workout.find({}, (err, data) => {
-    if (err) {
-        res.status(500).json(err);
-      } else {
-        res.render("exercise");
-      }})
+app.post("/api/workouts", (req,res) => {
+  db.Workout.create({})
+    .then(Workout => {
+      res.json(Workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+// app.get("/exercise", (req, res) => {
+//     if (err) {
+//         res.status(500).json(err);
+//       } else {
+//         res.render("exercise");
+//       }
+// });
+
+// Workout.find({}, (err, res) => {
+//     if (err) {
+//         res.status(500).json(err);
+//       } else {
+//         res.render("exercise");
+//       }})
 
 
 //Start the server

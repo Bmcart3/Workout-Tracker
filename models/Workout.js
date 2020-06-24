@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
     day: {
-        type: Date 
+        type: Date
     },
     exercises: [
         {
@@ -30,9 +30,24 @@ const UserSchema = new Schema({
             },
             sets: {
                 type: Number
+            },
+            distance: {
+                type: Number
             }
         }
     ]
+},
+    {
+        toJSON: {
+            virtuals: true
+        }
+    }
+);
+
+UserSchema.virtual("totalDuration").get(function () {
+    return this.exercises.reduce((total, exercise) => {
+        return total + exercise.duration;
+    }, 0);
 });
 
 
