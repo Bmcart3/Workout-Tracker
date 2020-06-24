@@ -33,7 +33,7 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/api/exercise", (req, res) => {
+    app.get("/api/workouts/range", (req, res) => {
         db.Workout.find({})
         .then(Workout => {
             res.json(Workout);
