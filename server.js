@@ -1,7 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const db = require("./models");
 const { Workout } = require("./models");
 
 const PORT = process.env.PORT || 3000;
@@ -16,52 +15,10 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+require("./routes/html-routes.js")(app);
+require("./routes/api-routes.js")(app);
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
-
-app.get("/api/workouts", (req, res) => {
-    db.Workout.find({})
-        .then(Workout => {
-            res.json(Workout);
-        })
-        .catch(err => {
-            res.json(err);
-          });
-});
-
-app.get("/exercise", (req, res) => {
-  db.Workout.find({})
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-app.post("/api/workouts", (req,res) => {
-  db.Workout.create({})
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-// app.get("/exercise", (req, res) => {
-//     if (err) {
-//         res.status(500).json(err);
-//       } else {
-//         res.render("exercise");
-//       }
-// });
-
-// Workout.find({}, (err, res) => {
-//     if (err) {
-//         res.status(500).json(err);
-//       } else {
-//         res.render("exercise");
-//       }})
 
 
 //Start the server
